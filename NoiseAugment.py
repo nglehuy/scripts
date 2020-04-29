@@ -18,8 +18,8 @@ parser.add_argument("--output", "-o", type=str, help="Output dir")
 
 args = parser.parse_args()
 
-snr_min = 3
-snr_max = 10
+snr_min = 5
+snr_max = 15
 min_noises = 1
 max_noises = 3
 
@@ -83,7 +83,7 @@ noises_dir.append("white_noise")
 
 for wav_file in glob.glob(os.path.join(args.input, "**", "*.wav"), recursive=True):
   signal = read_audio(wav_file)
-  #signal = add_noise_from_sound(signal, noises_dir)
+  signal = add_noise_from_sound(signal, noises_dir)
   new_file = wav_file.replace(args.input, args.output)
   try:
     os.makedirs(os.path.dirname(new_file))
