@@ -45,7 +45,7 @@ def map_fn(aslice):
     cur_key = os.path.join(cur_parent_dir, key)
     key = os.path.join(args.output_dir, key)
     try:
-      os.makedirs(key)
+      os.makedirs(os.path.dirname(key))
     except Exception:
       pass
     shutil.move(cur_key, key)
