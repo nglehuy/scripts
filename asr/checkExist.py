@@ -18,10 +18,11 @@ slices = np.array_split(lines, cores)
 
 def map_fn(aslice):
   for i, line in enumerate(aslice):
-    aslice[i] = line.split("\t")
-    if not os.path.exists(aslice[i][0]):
-      print(f"Not existed: {aslice[i][0]}")
+    line = line.split("\t")
+    if not os.path.exists(line[0]):
+      print(f"Not existed: {line[0]}")
 
+print("Processing ...")
 
 with multiprocessing.Pool(cores) as pool:
   pool.map(map_fn, slices)
