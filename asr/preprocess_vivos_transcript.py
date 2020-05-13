@@ -14,7 +14,7 @@ with open(args.transcript, "r", encoding="utf-8") as f:
   lines = f.read().splitlines()
 
 with open(args.output, "w", encoding="utf-8") as w:
-  w.write("NAME\tSIZE\tTRANSCRIPT\n")
+  w.write("PATH\tDURATION\tTRANSCRIPT\n")
 
 transcript_dict = {}
 
@@ -26,8 +26,9 @@ for wav_file in glob.glob(os.path.join(os.path.dirname(args.transcript), "**", "
   wav_file = os.path.abspath(wav_file)
   name, ftype = os.path.splitext(os.path.basename(wav_file))
   transcript = transcript_dict[name].lower()
-  size = os.path.getsize(wav_file)
+  y, sr = librosa.load(wav_file, sr=None)
+  duration = librosa.core.get_duration(y=y, sr=sr)
   with open(args.output, "a", encoding="utf-8") as w:
-    w.write(f"{wav_file}\t{size}\t{transcript}\n")
+    w.write(f"{wav_file}\t{duration}\t{transcript}\n")
   print(f"Processed: {wav_file}", end="\r", flush=True)
 print("\nDone preprocessing vivos transcript")
