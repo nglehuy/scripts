@@ -19,19 +19,19 @@ with open(args.transcript, "r", encoding="utf-8") as i:
 random.shuffle(lines)
 lines = lines[:int(args.percent * len(lines))]
 
-for idx, line in enumerate(lines, 1):
-  line = line.split("\t")
-  src = line[0]
-  path = line[0].split("/")
-  path = path[-4:]
-  path = "/".join(path)
-  path = os.path.join(args.output, path)
-  try:
-    os.makedirs(os.path.dirname(path))
-  except Exception:
-    pass
-    shutil.copyfile(src, path)
-  print(f"\rProcessed: {idx}/{len(lines)} => {path}", end="")
+# for idx, line in enumerate(lines, 1):
+#   line = line.split("\t")
+#   src = line[0]
+#   path = line[0].split("/")
+#   path = path[-4:]
+#   path = "/".join(path)
+#   path = os.path.join(args.output, path)
+#   try:
+#     os.makedirs(os.path.dirname(path))
+#   except Exception:
+#     pass
+#     shutil.copyfile(src, path)
+#   print(f"\rProcessed: {idx}/{len(lines)} => {path}", end="")
 
 with open(os.path.join(args.output, os.path.basename(args.transcript)), "w", encoding="utf-8") as o:
   o.write("PATH\tDURATION\tTRANSCRIPT\n")
