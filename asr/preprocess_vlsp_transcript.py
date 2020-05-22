@@ -30,10 +30,12 @@ tokens = ".,;/\\\"@#$%^&*()_-+={}[]~`-|?!1234567890"
 
 slices = [[train_set, "train"], [dev_set, "dev"], [test_set, "test"]]
 
+
 def write_transcript(dataset, mode="train"):
   with open(os.path.join(args.output_dir, f"{mode}_transcripts.tsv"), "w", encoding="utf-8") as o:
     for audio_path, duration, text in dataset:
       o.write(f"{audio_path}\t{duration}\t{text}\n")
+
 
 def map_fn(aslice):
   dataset, mode = aslice

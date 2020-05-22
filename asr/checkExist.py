@@ -17,10 +17,11 @@ cores = multiprocessing.cpu_count()
 slices = np.array_split(lines, cores)
 
 def map_fn(aslice):
-  for i, line in enumerate(aslice):
+  for line in aslice:
     line = line.split("\t")
     if not os.path.exists(line[0]):
       print(f"Not existed: {line[0]}")
+
 
 print("Processing ...")
 
