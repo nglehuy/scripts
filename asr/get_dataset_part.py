@@ -33,7 +33,7 @@ lines = lines[:int(args.percent * len(lines))]
 #     shutil.copyfile(src, path)
 #   print(f"\rProcessed: {idx}/{len(lines)} => {path}", end="")
 
-with open(os.path.join(args.output, os.path.basename(args.transcript)), "w", encoding="utf-8") as o:
+with open(args.output, "w", encoding="utf-8") as o:
   o.write("PATH\tDURATION\tTRANSCRIPT\n")
   for line in lines:
     o.write(f"{line}\n")
