@@ -20,21 +20,19 @@ args.dir = os.path.abspath(args.dir)
 
 tokens = ".,;/\\\"@#$%^&*()_-+={}[]~`-|?!1234567890"
 
-for i, line in enumerate(lines):
-    line = line.split("\t")
-    path = line[0].split("/")
-    path = path[-args.level:]
-    path = "/".join(path)
-    line[0] = os.path.join(args.dir, path)
-    line[-1] = unicodedata.normalize("NFC", line[-1].lower())
-    if any([token in line[-1] for token in tokens]):
-        print(line[-1])
-        line[-1] = str(input("Input: ")).lower()
-    lines[i] = "\t".join(line)
-
 with open(args.transcript, "w", encoding="utf-8") as f:
     f.write(first_line + "\n")
-    for i, line in enumerate(lines, 1):
+    for i, line in enumerate(lines):
+        line = line.split("\t")
+        path = line[0].split("/")
+        path = path[args.level:]
+        path = "/".join(path)
+        line[0] = os.path.join(args.dir, path)
+        line[-1] = unicodedata.normalize("NFC", line[-1].lower())
+        if any([token in line[-1] for token in tokens]):
+            print(f"{line[0]}: {line[-1]}")
+            line[-1] = str(input("Input: ")).lower()
+        line = "\t".join(line)
         f.write(line + "\n")
         sys.stdout.write("\033[K")
         print(f"\rProcessed {i}/{len(lines)}", end="")
