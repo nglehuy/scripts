@@ -2,7 +2,7 @@ import argparse
 import os
 import unicodedata
 
-parser = argparse.ArgumentParser(description="Preprocess transcript for vivos dataset")
+parser = argparse.ArgumentParser()
 
 parser.add_argument("transcripts", nargs="+", type=str, help="transcript file")
 parser.add_argument("--output", type=str)
