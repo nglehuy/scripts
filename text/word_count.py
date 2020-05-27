@@ -1,5 +1,4 @@
 import argparse
-import unicodedata
 
 parser = argparse.ArgumentParser()
 
