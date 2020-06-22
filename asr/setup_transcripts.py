@@ -29,7 +29,7 @@ with open(args.transcript, "w", encoding="utf-8") as f:
         path = "/".join(path)
         line[0] = os.path.join(args.dir, path)
         line[-1] = unicodedata.normalize("NFC", line[-1].lower())
-        if any([token in line[-1] for token in tokens]):
+        if len(line[-1]) <= 0 or any([token in line[-1] for token in tokens]):
             print(f"{line[0]}: {line[-1]}")
             line[-1] = str(input("Input: ")).lower()
         line = "\t".join(line)
